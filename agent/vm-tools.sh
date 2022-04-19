@@ -57,11 +57,11 @@ log_info() {
 }
 
 send_install_result() {
-  curl -H "Content-Type: application/json" -H "commandpath: /host/zwatchInstallResult" -X POST -d "{\"vmInstanceUuid\": \"${vmInstanceUuid}\", \"version\": \"$1\"}" http://169.254.169.254/host/zwatchInstallResult
+  curl -H "Content-Type: application/json" -H "commandpath: /host/zwatchInstallResult" -X POST -d "{\"vmInstanceUuid\": \"${vmInstanceUuid}\", \"version\": \"$1\"}" https://raw.githubusercontent.com/hautph/zstack/master/agent/host/zwatchInstallResult
 }
 
 check_version_file() {
-  AGENT_VERSION=`curl -s http://169.254.169.254/agent_version`
+  AGENT_VERSION=`curl -s https://raw.githubusercontent.com/hautph/zstack/master/agent/agent_version`
   if [[ ! ${AGENT_VERSION} =~ ${BIN_NAME} ]]; then
     log_info "Fail to parse agent_version file"
     log_info "agent_version context: ${AGENT_VERSION}" not-print-to-screen
@@ -76,9 +76,9 @@ download_agent_tools() {
   fi
   cd $TEMP_PATH
   if [ x"$AGENT_OS" == x"freebsd" ]; then
-    curl http://169.254.169.254/zwatch-vm-agent-freebsd --silent -o zwatch-vm-agent.download
+    curl https://raw.githubusercontent.com/hautph/zstack/master/agent/zwatch-vm-agent-freebsd --silent -o zwatch-vm-agent.download
   else
-    curl http://169.254.169.254/zwatch-vm-agent --silent -o zwatch-vm-agent.download
+    curl https://raw.githubusercontent.com/hautph/zstack/master/agent/zwatch-vm-agent --silent -o zwatch-vm-agent.download
   fi
   cd - &> /dev/null
 }
@@ -104,7 +104,7 @@ check_md5() {
 }
 
 query_agent_info() {
-  vmInstanceUuid=`curl --silent http://169.254.169.254/2009-04-04/meta-data/instance-id`
+  vmInstanceUuid=`curl --silent https://raw.githubusercontent.com/hautph/zstack/master/agent/meta-data/instance-id`
   version=`echo $AGENT_VERSION | grep "zwatch-vm-agent=" | awk -F '=' '{print $2}'`
 }
 
