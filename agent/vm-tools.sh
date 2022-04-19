@@ -124,13 +124,13 @@ install_agent_tools() {
 start_agent_tools() {
   service zwatch-vm-agent restart
 
-  if [ $? != 0 ]; then
-    send_install_result "InstallFailed"
-    log_info "service zwatch-vm-agent start fail"
-    exit 1
-  fi
+ # if [ $? != 0 ]; then
+ #   send_install_result "InstallFailed"
+ #   log_info "service zwatch-vm-agent start fail"
+ #   exit 1
+ # fi
 
-  send_install_result $version
+ # send_install_result $version
 }
 
 # process
