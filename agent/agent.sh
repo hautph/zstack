@@ -1,8 +1,8 @@
 #!/bin/bash
 set -e
 
-YUM_PACKAGE_NAME="qemu-guest-agent"
-DEB_PACKAGE_NAME="qemu-guest-agent"
+YUM_PACKAGE_NAME="qemu-guest-agent tar"
+DEB_PACKAGE_NAME="qemu-guest-agent tar"
 DISTRO=$(cat /etc/*-release | grep -w PRETTY_NAME | cut -d= -f2 | tr -d '"')
 
  if cat /etc/*release | grep ^NAME | grep CentOS; then
